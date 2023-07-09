@@ -1,8 +1,8 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "shadertoy-to-kodelife",
-  "title": "Shadertoy to Kodelife",
-  "description": "Convert Shadertoy code to Kodelife code.",
+  "title": "Shadertoy to KodeLife",
+  "description": "Convert Shadertoy code to KodeLife code.",
   "icon": "command-icon.png",
   "author": "takuyahara",
   "categories": [
@@ -13,8 +13,8 @@
   "commands": [
     {
       "name": "shadertoy-to-kodelife",
-      "title": "Shadertoy to Kodelife",
-      "description": "Convert Shadertoy code to Kodelife code.",
+      "title": "Shadertoy to KodeLife",
+      "description": "Convert Shadertoy code to KodeLife code.",
       "mode": "view"
     }
   ],

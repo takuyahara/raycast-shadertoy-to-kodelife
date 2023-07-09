@@ -1,5 +1,5 @@
 {
-  "name": "[Raycast] Minify JSON",
+  "name": "[Raycast] Shadertoy to KodeLife",
   "image": "mcr.microsoft.com/devcontainers/typescript-node:0-20",
   "customizations": {
     "vscode": {
