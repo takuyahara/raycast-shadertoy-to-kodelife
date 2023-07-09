@@ -48,6 +48,27 @@ class GlslToken {
     this.tokens = newTokens;
     return this;
   }
+  replaceIchannels() {
+    const { tokens } = this;
+    const newTokens: Token[] = [];
+    for (const t of tokens) {
+      if (t.type === "ident" && t.data === "iChannel0") {
+        t.data = "texture0";
+      }
+      if (t.type === "ident" && t.data === "iChannel1") {
+        t.data = "texture1";
+      }
+      if (t.type === "ident" && t.data === "iChannel2") {
+        t.data = "texture2";
+      }
+      if (t.type === "ident" && t.data === "iChannel3") {
+        t.data = "texture3";
+      }
+      newTokens.push(t);
+    }
+    this.tokens = newTokens;
+    return this;
+  }
   replaceFragCoord() {
     const { tokens } = this;
     const newTokens: Token[] = [];
@@ -133,6 +154,7 @@ uniform sampler2D prevPass;
   const tokensConverted = new GlslToken(tokenString)
     .replaceShaderInputs()
     .removeShaderInputs()
+    .replaceIchannels()
     .replaceFragCoord()
     .fixMainImage()
     .removeEof();
