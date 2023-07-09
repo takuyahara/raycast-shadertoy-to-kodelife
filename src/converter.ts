@@ -72,11 +72,37 @@ class GlslToken {
   replaceFragCoord() {
     const { tokens } = this;
     const newTokens: Token[] = [];
+    // Replace `fragCoord` with `gl_FragCoord`
     for (const t of tokens) {
       if (t.type === "ident" && t.data === "fragCoord") {
         t.data = "gl_FragCoord";
       }
       newTokens.push(t);
+    }
+    // Add `gl_FragCoord`'s property
+    for (let i = 0, l = newTokens.length, previousLine = 0; i < l; i++) {
+      const t = newTokens[i];
+      const isBeginningOfLine = t.line !== previousLine;
+      if (!isBeginningOfLine) {
+        continue;
+      }
+      if (t.type === "keyword" && t.data === "vec2") {
+        continue;
+      }
+      for (let j = i + 1; j < l; j++) {
+        if (newTokens[j].type === "ident" && newTokens[j].data === "gl_FragCoord") {
+          const isPropertyRefered = newTokens[j + 1].type === "operator" && newTokens[j + 1].data === ".";
+          if (isPropertyRefered) {
+            break;
+          }
+          for (let k = j + 3; k < l; k++) {
+            if (newTokens[k].type === "operator" && newTokens[k].data === "." && newTokens[k + 1].type === "ident") {
+              newTokens[j].data += `.${newTokens[k + 1].data}`;
+              break;
+            }
+          }
+        }
+      }
     }
     this.tokens = newTokens;
     return this;
